@@ -1,5 +1,5 @@
 
-const LOG_IN = 'users/login';
+const LOG_IN = '/auth/login';
 
 
 

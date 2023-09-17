@@ -6,10 +6,12 @@ class CustomTextField extends StatelessWidget {
    CustomTextField({super.key, required this.hint,required this.controller,});
 
   final String hint ;
-  var controller = TextEditingController();
+  var controller ;
 
   @override
   Widget build(BuildContext context) {
+    print(controller.text);
+    print('anana ananana anannana annananan annanan');
     return Column(
       children: [
         Padding(
