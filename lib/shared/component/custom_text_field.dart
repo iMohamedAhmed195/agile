@@ -10,8 +10,6 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(controller.text);
-    print('anana ananana anannana annananan annanan');
     return Column(
       children: [
         Padding(

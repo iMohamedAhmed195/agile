@@ -1,5 +1,6 @@
 import 'package:agile/module/login_module/login_view.dart';
 import 'package:agile/shared/network/remote/dio_helper.dart';
+import 'package:agile/shared/service/app_reouter.dart';
 import 'package:agile/shared/service/bloc_observer.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
-      home: LogInView(),
     );
   }
 }

@@ -1,0 +1,5 @@
+
+const logIn = '/auth/login';
+
+
+

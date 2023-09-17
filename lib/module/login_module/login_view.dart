@@ -1,9 +1,11 @@
 import 'package:agile/module/login_module/login_cubit/login_cubit.dart';
-import 'package:agile/shared/component/custom_text_field.dart';
+
 import 'package:agile/shared/component/custom_text_sec_login.dart';
+import 'package:agile/shared/service/app_reouter.dart';
 import 'package:agile/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class LogInView extends StatelessWidget {
   LogInView({super.key});
@@ -29,35 +31,47 @@ class LogInView extends StatelessWidget {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0,right: 20.0, bottom: 30),
-                      child: TextField(
-                        decoration:  InputDecoration(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, bottom: 30),
+                      child: TextFormField(
+                        validator: (value){
+                          if(!value!.contains("@")){
+                            return 'please enter right email address';
+                          }
+                        },
+                        decoration: InputDecoration(
                             enabledBorder: buildOutlineInputBorder(),
                             focusedBorder: buildOutlineInputBorder(),
-                            hintText: 'email'
-                        ),
-                        keyboardType: TextInputType.text,
+                            hintText: 'email'),
+                        keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                       ),
                     )
                   ],
                 ),
-                  Column(
+                Column(
                   children: [
-                  Padding(
-                  padding: const EdgeInsets.only(left: 20.0,right: 20.0, bottom: 30),
-            child: TextField(
-              decoration:  InputDecoration(
-                  enabledBorder: buildOutlineInputBorder(),
-                  focusedBorder: buildOutlineInputBorder(),
-                  hintText: 'password'
-              ),
-              keyboardType: TextInputType.visiblePassword,
-              controller: passwordController,
-            ),
-          )
-          ],
-        ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, bottom: 30),
+                      child: TextFormField(
+                        validator: (value){
+                          if(value!.length <=6)
+                            {
+                              return 'please enter right password';
+                            }
+                        },
+                        decoration: InputDecoration(
+                            enabledBorder: buildOutlineInputBorder(),
+                            focusedBorder: buildOutlineInputBorder(),
+                            hintText: 'password'),
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: passwordController,
+                      ),
+                    )
+                  ],
+                ),
                 Column(
                   children: [
                     Padding(
@@ -67,7 +81,8 @@ class LogInView extends StatelessWidget {
                           Checkbox(value: false, onChanged: (value) {}),
                           const Text(
                             'Keep me logged in',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w400),
                           )
                         ],
                       ),
@@ -78,7 +93,7 @@ class LogInView extends StatelessWidget {
                     BlocConsumer<LoginCubit, LoginState>(
                       listener: (context, state) {
                         if (state is LoginSuccessState) {
-                          print('======================>>>>>>>>>>>>>>>>>>>aaaaaaaaaa');
+                          GoRouter.of(context).push(AppRouter.kHome);
                         }
                       },
                       builder: (context, state) {
@@ -90,13 +105,11 @@ class LogInView extends StatelessWidget {
                               color: const Color(0xff5A55CA)),
                           child: MaterialButton(
                             onPressed: () {
-
-                              if(formkey.currentState!.validate()){
-                                print("=========>${emailController.text}");
-                                print("=========>${passwordController.text}");
-                                LoginCubit.get(context).loginApp(email: emailController.text, password: passwordController.text);
+                              if (formkey.currentState!.validate()) {
+                                LoginCubit.get(context).loginApp(
+                                    email: emailController.text,
+                                    password: passwordController.text);
                               }
-
                             },
                             child: const Text(
                               'Login',
@@ -117,9 +130,10 @@ class LogInView extends StatelessWidget {
   }
 
   buildOutlineInputBorder() {
+
     return OutlineInputBorder(
+
         borderSide: const BorderSide(color: Styles.kColor),
         borderRadius: BorderRadius.circular(6));
   }
 }
-
