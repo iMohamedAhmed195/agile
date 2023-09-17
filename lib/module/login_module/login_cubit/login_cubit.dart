@@ -2,9 +2,8 @@ import 'package:agile/models/log_in_model/log_in_error_model.dart';
 import 'package:agile/models/log_in_model/log_in_success_model.dart';
 import 'package:agile/shared/network/remote/end_points.dart';
 import 'package:agile/shared/network/remote/dio_helper.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+
 
 part 'login_state.dart';
 
@@ -30,7 +29,7 @@ class LoginCubit extends Cubit<LoginState> {
           }
     })
         .catchError((error) {
-
+      print(error.toString());
       emit(LoginErrorState(error.toString()));
     });
   }

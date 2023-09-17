@@ -2,6 +2,7 @@ import 'package:agile/module/login_module/login_cubit/login_cubit.dart';
 
 import 'package:agile/shared/component/custom_text_sec_login.dart';
 import 'package:agile/shared/service/app_reouter.dart';
+import 'package:agile/shared/service/secure.dart';
 import 'package:agile/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,6 +95,7 @@ class LogInView extends StatelessWidget {
                       listener: (context, state) {
                         if (state is LoginSuccessState) {
                           GoRouter.of(context).push(AppRouter.kHome);
+                          Secure().secureWriteData(key: 'token' , value: state.loginModel.data!.token) ;
                         }
                       },
                       builder: (context, state) {
