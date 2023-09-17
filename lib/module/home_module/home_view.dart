@@ -1,29 +1,32 @@
 
+import 'package:agile/module/add_user_module/add_user_view.dart';
+import 'package:agile/shared/service/app_reouter.dart';
+import 'package:agile/shared/service/secure.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 
 class HomeView extends StatelessWidget {
    HomeView({super.key});
-final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
 
     return  Scaffold(
-      appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          if(scaffoldKey.currentState!.isDrawerOpen == false){
-            scaffoldKey.currentState!.openDrawer();
-          }else{
-            scaffoldKey.currentState!.openEndDrawer();
-          }
-        }, icon: const Icon(Icons.menu)),
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          IconButton(onPressed: (){
+            fun();
+            // Navigator.push(context, MaterialPageRoute(builder: (context)=>AddUserView()));
+          }, icon: Icon(
+              Icons.add
+          ))
+        ],
       ),
-      body:  Scaffold(
-        drawer: const Drawer(),
-        key: scaffoldKey,
-        body: const Text(
-          'eh feh'
-        ),
-      ),
+
     );
   }
+ void fun()async{
+   print(await Secure().secureGetData(key: 'token'));
+ }
 }
