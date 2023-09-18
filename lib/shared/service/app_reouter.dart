@@ -1,7 +1,5 @@
-import 'package:agile/module/home_module/home_view.dart';
-import 'package:agile/module/login_module/login_view.dart';
+import 'package:agile/module/home_module/home_admin_view.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../module/add_user_module/add_user_view.dart';
 
 
@@ -14,11 +12,11 @@ abstract class AppRouter{
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) =>  LogInView(),
+        builder: (context, state) =>   const HomeAdminView(),
       ),
       GoRoute(
         path: kHome,
-        builder: (context, state) =>   HomeView(),
+        builder: (context, state) =>   const HomeAdminView(),
       ),
       GoRoute(
         path: kAddUser,

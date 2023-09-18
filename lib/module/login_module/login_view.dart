@@ -39,6 +39,7 @@ class LogInView extends StatelessWidget {
                           if(!value!.contains("@")){
                             return 'please enter right email address';
                           }
+                          return null ;
                         },
                         decoration: InputDecoration(
                             enabledBorder: buildOutlineInputBorder(),
@@ -61,6 +62,7 @@ class LogInView extends StatelessWidget {
                             {
                               return 'please enter right password';
                             }
+                          return null ;
                         },
                         decoration: InputDecoration(
                             enabledBorder: buildOutlineInputBorder(),

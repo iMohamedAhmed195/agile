@@ -33,6 +33,7 @@ class AddDepartmentView extends StatelessWidget {
                             if(value!.isEmpty){
                               return 'please enter name';
                             }
+                            return null ;
                           },
                           decoration: InputDecoration(
                               enabledBorder: buildOutlineInputBorder(),
@@ -54,6 +55,7 @@ class AddDepartmentView extends StatelessWidget {
                             if(value!.isEmpty){
                               return 'please enter Assigned Manager';
                             }
+                            return null ;
                           },
                           decoration: InputDecoration(
                               enabledBorder: buildOutlineInputBorder(),
