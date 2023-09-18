@@ -75,7 +75,7 @@ class AddDepartmentView extends StatelessWidget {
                       child: BlocConsumer<AddDepartCubit, AddDepartState>(
                         listener: (context, state) {
                           if(state is AddDepartSuccessState){
-                            print('depart add succes');
+                            print('depart add success');
                           }
                         },
                         builder: (context, state) {

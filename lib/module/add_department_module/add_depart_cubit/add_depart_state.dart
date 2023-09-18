@@ -5,7 +5,7 @@ abstract class AddDepartState {}
 class AddDepartInitial extends AddDepartState {}
 class AddDepartLoadingState extends AddDepartState {}
 class AddDepartSuccessState extends AddDepartState {
-  AddDepartModel addDepartModel;
+  AddDepartSuccessModel addDepartModel;
 
   AddDepartSuccessState(this.addDepartModel);
 }

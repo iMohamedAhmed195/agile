@@ -1,12 +1,12 @@
-class AddDepartModel {
+class AddDepartSuccessModel {
   late String message;
   Data? data;
   late bool status;
   late int code;
 
-  AddDepartModel({required this.message, this.data,required this.status,required this.code});
+  AddDepartSuccessModel({required this.message, this.data,required this.status,required this.code});
 
-  AddDepartModel.fromJson(Map<String, dynamic> json) {
+  AddDepartSuccessModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     data = json['data'] != null ?  Data.fromJson(json['data']) : null;
     status = json['status'];

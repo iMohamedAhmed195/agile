@@ -1,3 +1,4 @@
+import 'package:agile/models/addd_depart_model/add_depart_failure_model.dart';
 import 'package:agile/models/addd_depart_model/add_depart_success_model.dart';
 import 'package:agile/shared/network/remote/dio_helper.dart';
 import 'package:agile/shared/network/remote/end_points.dart';
@@ -12,7 +13,8 @@ class AddDepartCubit extends Cubit<AddDepartState> {
 
  static AddDepartCubit get(context) => BlocProvider.of(context);
 
-  AddDepartModel? addDepartModel;
+  AddDepartSuccessModel? addDepartModel;
+  AddDepartFailureModel? addDepartFailureModel;
   void addedDepartment({required String nameDepart}) async{
     emit(AddDepartLoadingState());
 
@@ -25,10 +27,10 @@ class AddDepartCubit extends Cubit<AddDepartState> {
     )
         .then((value) {
       if(value.statusCode == 401){
-        addDepartModel = AddDepartModel.fromJson(value.data);
+        addDepartFailureModel = AddDepartFailureModel.fromJson(value.data);
       }
       else{
-        addDepartModel = AddDepartModel.fromJson(value.data);
+        addDepartModel = AddDepartSuccessModel.fromJson(value.data);
         emit(AddDepartSuccessState(addDepartModel!));
       }
     })
