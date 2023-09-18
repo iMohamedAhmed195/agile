@@ -12,7 +12,7 @@ class TextSecLogin extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.only(top:MediaQuery.of(context).size.height *0.1 ),
+          padding: EdgeInsets.only(top:MediaQuery.of(context).size.height *0.005 ),
           child:  Text(
             header,
             style: const TextStyle(

@@ -1,4 +1,5 @@
 
+import 'package:agile/models/get_managers_model/get_managers_model.dart';
 import 'package:agile/models/update_user_model/update_user_model.dart';
 import 'package:agile/shared/network/remote/end_points.dart';
 
@@ -14,6 +15,7 @@ class UpdateUserCubit extends Cubit<UpdateUserState> {
   static UpdateUserCubit get(context) => BlocProvider.of(context);
 
   UpdateUserModel? updateUserModel ;
+
 
 
   int index = 0;
@@ -37,17 +39,20 @@ class UpdateUserCubit extends Cubit<UpdateUserState> {
 
   }
 
-  void addedUser({required String name, required String email,required String phone,required String userStatus }) async{
+
+
+  void updateUser({required String name, required String email,required String phone,required String userStatus,required String departId }) async{
     emit(UpdateUserLoadingState());
 
     DioHelper.postData(
-      url: addUser,
+      url: updateUserDetails,
       data: {
         'email': email,
         'name': name,
         'phone': phone,
         'user_type': index ,
         'user_status': userStatus ,
+        'department_id':departId
       },
       token: await Secure().secureGetData(key: 'token'),
     )

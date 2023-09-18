@@ -15,3 +15,5 @@ class UpdateUserErrorState extends UpdateUserState {
 
   UpdateUserErrorState(this.error);
 }
+
+

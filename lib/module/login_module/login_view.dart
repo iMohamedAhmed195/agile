@@ -96,7 +96,12 @@ class LogInView extends StatelessWidget {
                     BlocConsumer<LoginCubit, LoginState>(
                       listener: (context, state) {
                         if (state is LoginSuccessState) {
-                          GoRouter.of(context).push(AppRouter.kHome);
+                          if(state.loginModel.data!.userType == "admin") {
+                            GoRouter.of(context).push(AppRouter.kHomeAdmin);
+                          }
+                          else if (state.loginModel.data!.userType == "user"){
+                            GoRouter.of(context).push(AppRouter.kHomeAdmin);
+                          }
                           Secure().secureWriteData(key: 'token' , value: state.loginModel.data!.token) ;
                         }
                       },

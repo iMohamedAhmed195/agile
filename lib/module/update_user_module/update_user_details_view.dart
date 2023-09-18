@@ -1,22 +1,29 @@
 import 'package:agile/shared/component/custom_text_sec_login.dart';
+import 'package:agile/shared/service/app_reouter.dart';
 import 'package:agile/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import 'update_user_cubit/update_user_cubit.dart';
 
 
 class UpdateUserDetailsView extends StatelessWidget {
   UpdateUserDetailsView({super.key});
 
-  int value = 0 ;
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController departNameController = TextEditingController();
+
+  var  emailController = TextEditingController();
+  var  passwordController = TextEditingController();
+  var  nameController = TextEditingController();
+  var  phoneController = TextEditingController();
+  var  departNameController = TextEditingController();
   var formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocProvider(
+  create: (context) => UpdateUserCubit(),
+  child: Scaffold(
       backgroundColor: const Color(0xffF3FAF9),
       appBar:AppBar(
           backgroundColor: const Color(0xffF3FAF9),
@@ -29,74 +36,207 @@ class UpdateUserDetailsView extends StatelessWidget {
           )
       ),
       body: SingleChildScrollView(
-        child: SafeArea(
-            child: Form(
-              key: formkey,
-              child: Column(
+        child: Form(
+          key: formkey,
+          child: Column(
+            children: [
+              const TextSecLogin(
+                  header: 'Update User!',
+                  para:
+                  ' Update user details and give them a new identity.'),
+              Column(
                 children: [
-                  const TextSecLogin(
-                      header: 'Add New User!',
-                      para:
-                      ' Create a new user now and assign them tasks right away.'),
-                  // CustomTextField(
-                  //   hint: 'Name',
-                  //   controller: nameController,
-                  // ),
-                  // CustomTextField(
-                  //   hint: 'email',
-                  //   controller: emailController,
-                  // ),
-                  // CustomTextField(
-                  //   hint: 'phone',
-                  //   controller: phoneController,
-                  // ),
-                  // CustomTextField(
-                  //   hint: 'password',
-                  //   controller: passwordController,
-                  // ),
-                  // CustomTextField(
-                  //   hint: 'Department Name',
-                  //   controller: departNameController,
-                  // ),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: RadioListTile(
-                            value: 1,
-                            groupValue: value,
-                            onChanged: (value) {},
-                            title:  Text("admin",style: TextStyle(fontSize: 12.sp),),
-                          )),
-                      Expanded(
-                        child: RadioListTile(
-                          value: 2,
-                          groupValue: value,
-                          onChanged: (value) {},
-                          title:  Text('Manager',style: TextStyle(fontSize: 12.sp)),
-                        ),
-                      ),
-                      Expanded(
-                        child: RadioListTile(
-                          value: 3,
-                          groupValue: value,
-                          onChanged: (value) {},
-                          title:  Text('User',style: TextStyle(fontSize: 12.sp)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  ButtonAndCheckboxSec(
-                    name: nameController.text,
-                    phone: phoneController.text,
-                    email: emailController.text,
-                    password: passwordController.text,
-                    departName: departNameController.text,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: 30),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'please enter your name';
+                        }
+                        return null ;
+                      },
+                      decoration: InputDecoration(
+                          enabledBorder: buildOutlineInputBorder(),
+                          focusedBorder: buildOutlineInputBorder(),
+                          hintText: 'name'),
+                      keyboardType: TextInputType.text,
+                      controller: nameController,
+                    ),
                   )
                 ],
               ),
-            )),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: 30),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (!value!.contains("@")) {
+                          return 'please enter right email address';
+                        }
+                        return null ;
+                      },
+                      decoration: InputDecoration(
+                          enabledBorder: buildOutlineInputBorder(),
+                          focusedBorder: buildOutlineInputBorder(),
+                          hintText: 'email'),
+                      keyboardType: TextInputType.text,
+                      controller: emailController,
+                    ),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: 30),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.length <= 3) {
+                          return 'please enter your phone';
+                        }
+                        return null ;
+                      },
+                      decoration: InputDecoration(
+                          enabledBorder: buildOutlineInputBorder(),
+                          focusedBorder: buildOutlineInputBorder(),
+                          hintText: 'phone'),
+                      keyboardType: TextInputType.phone,
+                      controller: phoneController,
+                    ),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: 30),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.length <= 6) {
+                          return 'please enter right password';
+                        }
+                        return null ;
+                      },
+                      decoration: InputDecoration(
+                          enabledBorder: buildOutlineInputBorder(),
+                          focusedBorder: buildOutlineInputBorder(),
+                          hintText: 'password'),
+                      obscureText: true,
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: passwordController,
+                    ),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0, right: 20.0, bottom: 30),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'please enter your department name';
+                        }
+                        return null ;
+                      },
+                      decoration: InputDecoration(
+                          enabledBorder: buildOutlineInputBorder(),
+                          focusedBorder: buildOutlineInputBorder(),
+                          hintText: 'department name'),
+                      keyboardType: TextInputType.text,
+                      controller: departNameController,
+                    ),
+                  )
+                ],
+              ),
+
+              Column(
+                children: [
+                  BlocConsumer<UpdateUserCubit, UpdateUserState>(
+                    listener: (context, state) {
+                      if (state is UpdateUserSuccessState) {
+                        GoRouter.of(context).push(AppRouter.kHomeAdmin);
+                      }
+                    },
+                    builder: (context, state) {
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: RadioListTile(
+                                    value:"admin",
+                                    groupValue: UpdateUserCubit.get(context).selectValue,
+                                    onChanged: (value) {
+                                      UpdateUserCubit.get(context).changeRadio(value!);
+                                    },
+                                    title:  const Text("admin",style: TextStyle(fontSize: 12),),
+                                  )),
+                              Expanded(
+                                child: RadioListTile(
+                                  value: "manager",
+                                  groupValue: UpdateUserCubit.get(context).selectValue,
+                                  onChanged: (value) {
+                                    UpdateUserCubit.get(context).changeRadio(value!);
+                                  },
+                                  title:  const Text('Manager',style: TextStyle(fontSize: 12)),
+                                ),
+                              ),
+                              Expanded(
+                                child: RadioListTile(
+                                  value: "user",
+                                  groupValue: UpdateUserCubit.get(context).selectValue,
+                                  onChanged: (value) {
+                                    UpdateUserCubit.get(context).changeRadio(value!);
+                                  },
+                                  title:  const Text('User',style: TextStyle(fontSize: 12)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            height: 48,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                color: const Color(0xff5A55CA)),
+                            child: MaterialButton(
+                              onPressed: () {
+                                if (formkey.currentState!.validate()) {
+                                  UpdateUserCubit.get(context).updateUser(
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      phone: phoneController.text,
+                                      userStatus: "0",
+                                     departId: departNameController.text
+                                  );
+                                }
+                              },
+                              child: const Text(
+                                'Create user',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
+
+            ],
+          ),
+        ),
       ),
-    );
+    ),
+);
   }
 
   buildOutlineInputBorder() {
@@ -106,40 +246,4 @@ class UpdateUserDetailsView extends StatelessWidget {
   }
 }
 
-class ButtonAndCheckboxSec extends StatelessWidget {
-  const ButtonAndCheckboxSec(
-      {super.key,
-        required this.email,
-        required this.password,
-        required this.name,
-        required this.phone,
-        required this.departName});
 
-  final String email;
-  final String password;
-  final String name;
-  final String phone;
-  final String departName;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: 48,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: const Color(0xff5A55CA)),
-          child: MaterialButton(
-            onPressed: () {},
-            child: const Text(
-              'Create',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
