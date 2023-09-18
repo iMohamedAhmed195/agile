@@ -10,7 +10,6 @@ import 'package:go_router/go_router.dart';
 class AddUserView extends StatelessWidget {
   AddUserView({super.key});
 
-  String value = 'admin';
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -21,6 +20,15 @@ class AddUserView extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddUserCubit(),
       child: Scaffold(
+        appBar:AppBar(
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                icon:const Icon(Icons.arrow_back_ios)
+            )
+        ),
         body: SingleChildScrollView(
           child: SafeArea(
               child: Form(
@@ -122,7 +130,9 @@ class AddUserView extends StatelessWidget {
                 ),
                 BlocConsumer<AddUserCubit, AddUserState>(
                   listener: (context, state) {
-                    // TODO: implement listener
+                    if(state is AddUserSuccessState){
+                      print("there is  add success");
+                    }
                   },
                   builder: (context, state) {
                     return Row(
@@ -130,9 +140,12 @@ class AddUserView extends StatelessWidget {
                         Expanded(
                           child: RadioListTile(
                             value: 'admin',
-                            groupValue: value,
+                            groupValue: AddUserCubit.get(context).selectValue,
                             onChanged: (value) {
-                              AddUserCubit.get(context).changeRadio(value!);
+
+                              AddUserCubit.get(context).changeRadio(value! );
+
+
                             },
                             title: const Text(
                               "admin",
@@ -143,8 +156,14 @@ class AddUserView extends StatelessWidget {
                         Expanded(
                           child: RadioListTile(
                             value: 'manager',
-                            groupValue: value,
-                            onChanged: (value) {},
+                            groupValue:AddUserCubit.get(context).selectValue,
+                            onChanged: (value) {
+
+                              AddUserCubit.get(context).changeRadio(value!);
+
+
+
+                            },
                             title:
                                 const Text('Manager', style: TextStyle(fontSize: 12)),
                           ),
@@ -152,8 +171,12 @@ class AddUserView extends StatelessWidget {
                         Expanded(
                           child: RadioListTile(
                             value: 'user',
-                            groupValue: value,
-                            onChanged: (value) {},
+                            groupValue: AddUserCubit.get(context).selectValue,
+                            onChanged: (value) {
+                              AddUserCubit.get(context).changeRadio(value!);
+
+
+                            },
                             title: const Text('User', style: TextStyle(fontSize: 12)),
                           ),
                         ),

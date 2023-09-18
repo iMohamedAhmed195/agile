@@ -1,8 +1,11 @@
 
+import 'package:agile/shared/service/app_reouter.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeAdminView extends StatelessWidget {
   const HomeAdminView({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +53,16 @@ class HomeAdminView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: myDrawerList(),
+                padding: const EdgeInsets.only(top: 50.0),
+                child: Column(
+                  children: [
+                    myDrawerList(happened: 'Add User' , icon:  Icons.add ,context: context),
+                    myDrawerList(happened: 'Add Department' , icon:  Icons.house_siding_sharp ,context: context),
+                    myDrawerList(happened: 'Update User' , icon:  Icons.update ,context: context),
+                    myDrawerList(happened: 'Update Department' , icon:  Icons.receipt_long_outlined ,context: context),
+
+                  ],
+                ),
               )
             ],
           ),
@@ -213,37 +224,45 @@ class HomeAdminView extends StatelessWidget {
     );
   }
 
-  Widget myDrawerList() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: Column(
-        children: [
-          menuItem(text: 'Add User', icon: Icons.add),
-        ],
-      ),
+  Widget myDrawerList({required String happened ,required IconData icon , required BuildContext context }) {
+    return Column(
+      children: [
+        menuItem(text: happened, icon: icon ,context: context),
+      ],
     );
   }
 
-  Widget menuItem({String? text, IconData? icon}) {
+  Widget menuItem({required String text,required IconData icon , required BuildContext context}) {
+
     return Material(
       child: InkWell(
+        onTap: (){
+          if(text == 'Add User') {
+            GoRouter.of(context).push(AppRouter.kAddUser);
+          }else if(text == 'Add Department'){
+            GoRouter.of(context).push(AppRouter.kAddDepart);
+          }else if(text == 'Update User'){
+            GoRouter.of(context).push(AppRouter.kUpdateUser);
+          }else if(text =='Update Department'){
+            GoRouter.of(context).push(AppRouter.kUpdateDepart);
+          }
+        },
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.only(top: 8.0),
           child: Container(
             height: 50,
             color: const Color(0xffF3FAF9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Expanded(
-                    child: Icon(
-                  icon!,
+                const SizedBox(width: 20,),
+                Icon(
+                  icon,
                   size: 20,
                   color: Colors.black,
-                )),
-                Expanded(
-                  child: Text(text!),
                 ),
+                const SizedBox(width: 20,),
+                Text(text),
               ],
             ),
           ),

@@ -5,14 +5,23 @@ import 'package:flutter/material.dart';
 
 
 
-class AddDepartmentView extends StatelessWidget {
-  AddDepartmentView({super.key});
+class UpdateDepartmentView extends StatelessWidget {
+  UpdateDepartmentView({super.key});
   final TextEditingController nameController = TextEditingController();
   final TextEditingController numDepartController = TextEditingController();
   var formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              icon:const Icon(Icons.arrow_back_ios)
+          )
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
             child: Form(

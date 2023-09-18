@@ -12,19 +12,24 @@ class AddUserCubit extends Cubit<AddUserState> {
   AddUserModel? addUserModel;
 
   int index = 0;
-  String value = 'admin';
-  String changeRadio(String y ){
+  String selectValue ='admin';
+  void changeRadio(String y){
     if(y == 'admin'){
       index =0;
-      value ='admin';
+      selectValue = y;
+      emit(AddUserChange());
     }else if(y == 'manager'){
       index = 1;
-      value ='manager' ;
+      selectValue = y;
+      emit(AddUserChange());
+
     }else if (y == 'user'){
       index = 2;
-      value ='user' ;
+      selectValue = y;
+      emit(AddUserChange());
+
     }
-    return value ;
+
   }
   void addedUser({required String name, required String email,required String phone,required String password }) async{
     emit(AddUserLoadingState());
@@ -36,7 +41,7 @@ class AddUserCubit extends Cubit<AddUserState> {
           'password': password,
           'name': name,
           'phone': phone,
-          'user_type': index,
+          'user_type':  selectValue == "user" ? index : 0,
         },
         token: await Secure().secureGetData(key: 'token'),
     )
