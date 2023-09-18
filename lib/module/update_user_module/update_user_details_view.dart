@@ -17,13 +17,15 @@ class UpdateUserDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffF3FAF9),
       appBar:AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: const Color(0xffF3FAF9),
+          elevation: 0,
           leading: IconButton(
               onPressed: (){
                 Navigator.pop(context);
               },
-              icon:const Icon(Icons.arrow_back_ios)
+              icon:const Icon(Icons.arrow_back_ios , color: Colors.black,)
           )
       ),
       body: SingleChildScrollView(
