@@ -20,12 +20,7 @@ class CreateTaskView extends StatelessWidget {
       create: (context) => CreateTaskCubit()..getEmployee(),
       child: BlocConsumer<CreateTaskCubit, CreateTaskState>(
         listener: (context, state) {
-          if(state is CreateTaskSuccessState){
-            print('added task suc');
-          }
-          else if(state is CreateTaskErrorState){
-            print(state.messageError);
-          }
+
         },
         builder: (context, state) {
           return Scaffold(
@@ -119,11 +114,11 @@ class CreateTaskView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey, width: 2)),
                         child: DropdownButton(
-                          hint: Text('Assigned Employee'),
+                          hint: const Text('Assigned Employee'),
                           isExpanded: true,
                           value: CreateTaskCubit.get(context).valueChoose,
                           onChanged: (newValue) {
@@ -150,14 +145,9 @@ class CreateTaskView extends StatelessWidget {
                           child: MaterialButton(
                             onPressed: () {
                               if(CreateTaskCubit.get(context).startDate == null || CreateTaskCubit.get(context).endDate ==null){
-                                print('asdkjbasijfjasnfjknaslkdnlaksdn');
                               }
                               else if (formkey.currentState!.validate()) {
-                                print(titleController.text);
-                                print(descriptionController.text);
-                                print(CreateTaskCubit.get(context).valueChoose);
-                                print(DateFormat('yyyy/MM/d').format(CreateTaskCubit.get(context).startDate!));
-                                print(DateFormat('yyyy/MM/d').format(CreateTaskCubit.get(context).endDate!));
+
                                 CreateTaskCubit.get(context).createTask(
                                     title: titleController.text,
                                     description: descriptionController.text,

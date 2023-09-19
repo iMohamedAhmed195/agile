@@ -135,7 +135,6 @@ class AddUserView extends StatelessWidget {
                     BlocConsumer<AddUserCubit, AddUserState>(
                       listener: (context, state) {
                         if (state is AddUserSuccessState) {
-                          print("there is  add success");
                           GoRouter.of(context).push(AppRouter.kHomeAdmin);
                         }
                       },

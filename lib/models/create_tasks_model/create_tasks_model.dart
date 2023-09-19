@@ -8,7 +8,7 @@ class CreateTaskModel {
 
   CreateTaskModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     status = json['status'];
     code = json['code'];
   }
@@ -48,12 +48,12 @@ class Data {
     startDate = json['start date'];
     endDate = json['end date'];
     creator =
-    json['creator'] != null ? new Creator.fromJson(json['creator']) : null;
+    json['creator'] != null ? Creator.fromJson(json['creator']) : null;
     department = json['department'] != null
-        ? new Department.fromJson(json['department'])
+        ? Department.fromJson(json['department'])
         : null;
     employee = json['employee'] != null
-        ? new Creator.fromJson(json['employee'])
+        ? Creator.fromJson(json['employee'])
         : null;
   }
 
@@ -104,7 +104,7 @@ class Department {
     id = json['id'];
     name = json['name'];
     manager =
-    json['manager'] != null ? new Creator.fromJson(json['manager']) : null;
+    json['manager'] != null ? Creator.fromJson(json['manager']) : null;
   }
 
 }

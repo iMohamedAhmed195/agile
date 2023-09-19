@@ -15,5 +15,32 @@ class UpdateUserErrorState extends UpdateUserState {
 
   UpdateUserErrorState(this.error);
 }
+class GetUserLoadingState extends UpdateUserState {}
+class GetUserSuccessState extends UpdateUserState {
+  final GetAllUserModel getAllUserModel;
 
+GetUserSuccessState(this.getAllUserModel);
+}
+class GetUserErrorState extends UpdateUserState {
+  final String error;
+
+  GetUserErrorState(this.error);
+}
+
+
+class ChooseValueState extends UpdateUserState {}
+
+class GetDepartLoadingState extends UpdateUserState {}
+class GetDepartSuccessState extends UpdateUserState {
+  final GetAllDepartmentModel getAllDepartmentModel;
+  GetDepartSuccessState(this.getAllDepartmentModel);
+}
+class GetDepartErrorState extends UpdateUserState {
+  final String messageError ;
+
+
+  GetDepartErrorState(this.messageError);
+
+
+}
 

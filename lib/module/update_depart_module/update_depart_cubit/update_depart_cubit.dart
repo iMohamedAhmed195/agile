@@ -1,6 +1,6 @@
 
-import 'package:agile/models/get_department_model/get_department_model.dart';
 import 'package:agile/models/get_managers_model/get_managers_model.dart';
+import 'package:agile/models/get_user_model/get_all_user_model.dart';
 import 'package:agile/shared/network/remote/end_points.dart';
 import 'package:agile/models/update_depart_mode/update_depart_failure_mode.dart';
 import 'package:agile/models/update_depart_mode/update_depart_success_mode.dart';
@@ -16,58 +16,74 @@ class UpdateDepartCubit extends Cubit<UpdateDepartState> {
 
   UpdateDepartSuccessModel? updateDepartSuccessModel;
   UpdateDepartFailureModel? updateDepartFailureModel;
-  // GetAllDepartmentModel? getAllDepartmentModel;
-  //
-  //
-  // void getDepartment()async{
-  //   emit(GetDepartLoadingState());
-  //
-  //   DioHelper.getData(
-  //     url: getAllDepart,
-  //     token: await Secure().secureGetData(key: 'token'),
-  //   )
-  //       .then((value) {
-  //     getAllDepartmentModel = GetAllDepartmentModel.fromJson(value.data);
-  //     emit(GetDepartSuccessState(getAllDepartmentModel!));
-  //   })
-  //       .catchError((error) {
-  //     print(error.toString());
-  //     emit(GetDepartErrorState(error.toString()));
-  //   });
-  // }
+  GetAllManagersModel? getAllManagersModel;
+  GetAllUserModel? getAllUserModel;
+  List<String> userId = [''];
+  List<String> managersId= [''];
+  String managerChoose ='' ;
+  String userChoose = '';
 
-  GetAllDepartmentModel? getAllDepartmentModel;
+
+
+  chooseManager(String value){
+    managerChoose = value ;
+    emit(ChooseValueState());
+  }
+
+  chooseUser(String value){
+    userChoose = value ;
+    emit(ChooseValueState());
+  }
+
+  getUsers()async{
+    emit(GetUserLoadingState());
+    DioHelper.getData(
+      url: getAllUser,
+      token: await Secure().secureGetData(key: 'token'),
+    )
+        .then((value) {
+      getAllUserModel = GetAllUserModel.fromJson(value.data);
+      for(int i = 0 ; i<getAllUserModel!.data!.length;i++){
+        userId.add(getAllUserModel!.data![i].id!.toString());
+      }
+
+      emit(GetUserSuccessState(getAllUserModel!));
+
+    })
+        .catchError((error) {
+      print(error.toString());
+      emit(GetUserErrorState(error.toString()));
+    });
+  }
+
+
   void getManagers()async{
-    emit(GetDepartmentLoadingState());
+    emit(GetManagerLoadingState());
 
     DioHelper.getData(
       url: getAllManagers,
       token: await Secure().secureGetData(key: 'token'),
     )
         .then((value) {
-      getAllDepartmentModel = GetAllDepartmentModel.fromJson(value.data);
-      emit(GetDepartmentSuccessState(getAllDepartmentModel!));
+      getAllManagersModel = GetAllManagersModel.fromJson(value.data);
+      for(int i = 0 ; i<getAllManagersModel!.data!.length;i++){
+        managersId.add(getAllManagersModel!.data![i].id.toString());
+      }
+
+      emit(GetManagerSuccessState(getAllManagersModel!));
     })
         .catchError((error) {
       print(error.toString());
-      emit(GetDepartmentErrorState(error.toString()));
+      emit(GetManagerErrorState(error.toString()));
     });
   }
-  List<String> managersId= [];
-  String valueChoose ='' ;
-  listAllManagers(){
-    for(int i = 0 ; i<getAllDepartmentModel!.data!.length;i++){
-      managersId.add(getAllDepartmentModel!.data![i].id.toString());
-    }
-    print(managersId);
-    emit(EndListState());
-    return managersId ;
-  }
-  void updateDepartment({required String nameDepart , required String managerId}) async{
+
+
+  void updateDepartment({required String nameDepart , required String managerId ,required String userId}) async{
     emit(UpdateDepartLoadingState());
 
     DioHelper.postData(
-      url: updateDepart + ' ',
+      url: "$updateDepart$userId",
       data: {
         'name': nameDepart,
         'manager_id': managerId

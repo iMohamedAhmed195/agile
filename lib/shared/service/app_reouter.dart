@@ -1,11 +1,8 @@
 import 'package:agile/module/add_department_module/add_depart_view.dart';
-import 'package:agile/module/create_task_module/create_task_view.dart';
 import 'package:agile/module/home_module/home_admin_view.dart';
 import 'package:agile/module/home_module/home_user_view.dart';
 import 'package:agile/module/login_module/login_view.dart';
-import 'package:agile/module/update_depart_module/get_managers_view.dart';
 import 'package:agile/module/update_depart_module/update_depart_view.dart';
-import 'package:agile/module/update_tasks_module/update_tasks_view.dart';
 import 'package:agile/module/update_user_module/update_user_details_view.dart';
 import 'package:go_router/go_router.dart';
 import '../../module/add_user_module/add_user_view.dart';
@@ -28,7 +25,7 @@ abstract class AppRouter{
       ),
       GoRoute(
         path: kHomeAdmin,
-        builder: (context, state) =>    CreateTaskView(),
+        builder: (context, state) =>    const HomeAdminView(),
       ),GoRoute(
         path: kHomeUser,
         builder: (context, state) =>   const HomeUserView(),

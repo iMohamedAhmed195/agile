@@ -17,26 +17,30 @@ class UpdateDepartErrorState extends UpdateDepartState {
 
   UpdateDepartErrorState(this.error);
 }
-// class GetDepartLoadingState extends UpdateDepartState {}
-// class GetDepartSuccessState extends UpdateDepartState {
-//   final GetAllDepartmentModel getAllDepartmentModel;
-//
-//   GetDepartSuccessState(this.getAllDepartmentModel);
-// }
-// class GetDepartErrorState extends UpdateDepartState {
-//   final String error;
-//
-//   GetDepartErrorState(this.error);
-// }
 
-class GetDepartmentLoadingState extends UpdateDepartState {}
-class GetDepartmentSuccessState extends UpdateDepartState {
-  final GetAllDepartmentModel getAllDepartmentModel;
+class GetManagerLoadingState extends UpdateDepartState {}
+class GetManagerSuccessState extends UpdateDepartState {
+  final GetAllManagersModel getAllManagersModel;
 
-  GetDepartmentSuccessState(this.getAllDepartmentModel);
+  GetManagerSuccessState(this.getAllManagersModel);
 }
-class GetDepartmentErrorState extends UpdateDepartState {
+class GetManagerErrorState extends UpdateDepartState {
   final String error;
 
-  GetDepartmentErrorState(this.error);
+  GetManagerErrorState(this.error);
 }
+
+class GetUserLoadingState extends UpdateDepartState {}
+class GetUserSuccessState extends UpdateDepartState {
+  final GetAllUserModel getAllUserModel;
+
+  GetUserSuccessState(this.getAllUserModel);
+}
+class GetUserErrorState extends UpdateDepartState {
+  final String error;
+
+  GetUserErrorState(this.error);
+}
+
+
+class ChooseValueState extends UpdateDepartState {}

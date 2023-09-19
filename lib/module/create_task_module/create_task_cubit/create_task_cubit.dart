@@ -4,9 +4,8 @@ import 'package:agile/models/get_employee_model/get_employee_model.dart';
 import 'package:agile/shared/network/remote/dio_helper.dart';
 import 'package:agile/shared/network/remote/end_points.dart';
 import 'package:agile/shared/service/secure.dart';
-import 'package:bloc/bloc.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'create_task_state.dart';
 
@@ -34,8 +33,6 @@ class CreateTaskCubit extends Cubit<CreateTaskState> {
       for(int i = 0 ; i<getEmployeeModel!.data!.length;i++){
         employeeId.add(getEmployeeModel!.data![i].id!.toString());
       }
-      print(employeeId);
-      print("mostafa");
       emit(GetEmployeeSuccessState(getEmployeeModel!));
 
     })
@@ -44,6 +41,8 @@ class CreateTaskCubit extends Cubit<CreateTaskState> {
       emit(GetEmployeeErrorState(error.toString(),errorModel!));
     });
   }
+
+
   void createTask({required String title, required String description,required String employeeId,required String startDate,required String endDate}) async{
     emit(CreateTaskLoadingState());
     DioHelper.postData(

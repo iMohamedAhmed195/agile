@@ -1,12 +1,12 @@
-class GetEmployeeModel {
+class GetAllUserModel {
   late String message;
   List<Data>? data;
-  late bool status;
+  late  bool status;
   late int code;
 
-  GetEmployeeModel({ required this.message, this.data,required this.status,required this.code});
+  GetAllUserModel({ required this.message, this.data,required this.status,required this.code});
 
-  GetEmployeeModel.fromJson(Map<String, dynamic> json) {
+  GetAllUserModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     if (json['data'] != null) {
       data = <Data>[];
@@ -17,6 +17,7 @@ class GetEmployeeModel {
     status = json['status'];
     code = json['code'];
   }
+
 
 }
 
@@ -50,6 +51,5 @@ class Data {
     userType = json['user_type'];
     departmentId = json['department_id'];
   }
-
 
 }

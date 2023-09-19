@@ -100,7 +100,7 @@ class LogInView extends StatelessWidget {
                             GoRouter.of(context).push(AppRouter.kHomeAdmin);
                           }
                           else if (state.loginModel.data!.userType == "user"){
-                            GoRouter.of(context).push(AppRouter.kHomeAdmin);
+                            GoRouter.of(context).push(AppRouter.kHomeUser);
                           }
                           Secure().secureWriteData(key: 'token' , value: state.loginModel.data!.token) ;
                         }
