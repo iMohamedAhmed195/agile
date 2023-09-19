@@ -25,7 +25,6 @@ class _HomeUserViewState extends State<HomeUserView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF3FAF9),
       appBar: AppBar(
         backgroundColor: const Color(0xffF3FAF9),
         elevation: 0,

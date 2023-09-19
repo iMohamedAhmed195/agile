@@ -5,7 +5,9 @@ const addDepartment = '/department/store';
 const updateDepart = '/department/update/';
 const getAllDepart='/department/index';
 const getAllManagers='/user/show-managers';
+const getAllEmployee='/user/show-employees';
 const updateUserDetails = '/user/update/';
+const createTasks = '/task/store';
 
 
 
