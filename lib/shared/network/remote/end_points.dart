@@ -9,6 +9,8 @@ const getAllManagers='/user/show-managers';
 const getAllEmployee='/user/show-employees';
 const updateUserDetails = '/user/update/';
 const createTasks = '/task/store';
+const getAllTasks='/task/index';
+const updateTasks = '/task/update/';
 
 
 
