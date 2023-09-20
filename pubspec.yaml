@@ -45,11 +45,19 @@ dependencies:
   calendar_timeline: ^1.1.2
   syncfusion_flutter_datepicker: ^23.1.36
   intl: ^0.18.1
+  image_picker: ^1.0.4
+  conditional_builder_null_safety: ^0.0.6
+  flutter_launcher_icons: ^0.13.1
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
+  min_sdk_android: 21
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

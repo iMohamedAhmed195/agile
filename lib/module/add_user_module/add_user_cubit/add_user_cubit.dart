@@ -13,6 +13,7 @@ class AddUserCubit extends Cubit<AddUserState> {
 
   int index = 0;
   String selectValue ='admin';
+
   void changeRadio(String y){
     if(y == 'admin'){
       index =0;
@@ -31,6 +32,7 @@ class AddUserCubit extends Cubit<AddUserState> {
     }
 
   }
+
   void addedUser({required String name, required String email,required String phone,required String password }) async{
     emit(AddUserLoadingState());
 
@@ -41,20 +43,44 @@ class AddUserCubit extends Cubit<AddUserState> {
           'password': password,
           'name': name,
           'phone': phone,
-          'user_type':  selectValue == "user" ? index : 0,
+          'user_type':  index ,
         },
         token: await Secure().secureGetData(key: 'token'),
     )
         .then((value) {
+          print(1);
+          print(email);
+          print(password);
+          print(name);
+          print(phone);
+          print(index);
       if(value.statusCode == 401){
+        print(2);
+        print(email);
+        print(password);
+        print(name);
+        print(phone);
+        print(index);
         addUserModel = AddUserModel.fromJson(value.data);
       }
       else{
+        print(3);
+        print(email);
+        print(password);
+        print(name);
+        print(phone);
+        print(index);
         addUserModel = AddUserModel.fromJson(value.data);
         emit(AddUserSuccessState(addUserModel!));
       }
     })
         .catchError((error) {
+      print(4);
+      print(email);
+      print(password);
+      print(name);
+      print(phone);
+      print(index);
       print(error.toString());
       emit(AddUserErrorState(error.toString()));
     });

@@ -44,6 +44,10 @@ class GetUserErrorState extends UpdateTasksState {
 
 class ChooseValueState extends UpdateTasksState {}
 class ChangeReadOnlyState extends UpdateTasksState {}
+class AddUserChange extends UpdateTasksState {}
+class DateChange extends UpdateTasksState {}
+class ProfileImageSuccessStates extends UpdateTasksState {}
+class ProfileImageErrorStates extends UpdateTasksState {}
 
 class GetDepartLoadingState extends UpdateTasksState {}
 class GetDepartSuccessState extends UpdateTasksState {

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:agile/models/log_in_model/log_in_error_model.dart';
 import 'package:agile/models/log_in_model/log_in_success_model.dart';
 import 'package:agile/shared/network/remote/end_points.dart';
@@ -23,17 +25,13 @@ class LoginCubit extends Cubit<LoginState> {
         url: logIn,
         data: {'email': email, 'password': password})
         .then((value) {
-          if(value.statusCode == 401){
-            loginErrorModel = LoginErrorModel.fromJson(value.data);
-          }
-          else{
-            loginModel = LoginModel.fromJson(value.data);
-            emit(LoginSuccessState(loginModel!));
-          }
+         loginModel = LoginModel.fromJson(value.data);
+         emit(LoginSuccessState(loginModel!));
     })
         .catchError((error) {
+
       print(error.toString());
-      emit(LoginErrorState(error.toString()));
+      emit(LoginErrorState(error:error.toString(),));
     });
   }
 }

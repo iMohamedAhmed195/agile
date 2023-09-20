@@ -10,7 +10,10 @@ class LoginSuccessState extends LoginState {
   LoginSuccessState(this.loginModel);
 }
 class LoginErrorState extends LoginState {
-  final String error ;
+  final String? error ;
 
-  LoginErrorState(this.error);
+
+
+
+  LoginErrorState({this.error});
 }
