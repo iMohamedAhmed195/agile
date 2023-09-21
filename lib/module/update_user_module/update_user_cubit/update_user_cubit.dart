@@ -13,14 +13,14 @@ class UpdateUserCubit extends Cubit<UpdateUserState> {
   UpdateUserCubit() : super(UpdateUserInitial());
 
   static UpdateUserCubit get(context) => BlocProvider.of(context);
-  List<String> userId = [''];
-  List<String> departId = [''];
+  List<String> userId = ['Assigning User'];
+  List<String> departId = ['Assigning Depart'];
   UpdateUserModel? updateUserModel ;
   GetAllUserModel? getAllUserModel;
   GetAllDepartmentModel? getAllDepartmentModel;
   ErrorModel? errorModel ;
-  String departChoose = '';
-  String userChoose = '';
+  String departChoose = 'Assigning Depart';
+  String userChoose = 'Assigning User';
 
 
   int index = 0;

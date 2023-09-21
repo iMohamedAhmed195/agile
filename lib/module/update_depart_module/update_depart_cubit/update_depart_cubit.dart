@@ -18,10 +18,10 @@ class UpdateDepartCubit extends Cubit<UpdateDepartState> {
   UpdateDepartFailureModel? updateDepartFailureModel;
   GetAllManagersModel? getAllManagersModel;
   GetAllUserModel? getAllUserModel;
-  List<String> userId = [''];
-  List<String> managersId= [''];
-  String managerChoose ='' ;
-  String userChoose = '';
+  List<String> userId = ['Assigning employee'];
+  List<String> managersId= ['Assigning manager'];
+  String managerChoose ='Assigning manager' ;
+  String userChoose ='Assigning employee';
 
 
 
@@ -91,13 +91,8 @@ class UpdateDepartCubit extends Cubit<UpdateDepartState> {
       token: await Secure().secureGetData(key: 'token'),
     )
         .then((value) {
-      if(value.statusCode == 401){
-        updateDepartFailureModel = UpdateDepartFailureModel.fromJson(value.data);
-      }
-      else{
-        updateDepartSuccessModel = UpdateDepartSuccessModel.fromJson(value.data);
-        emit(UpdateDepartSuccessState(updateDepartSuccessModel!));
-      }
+      updateDepartSuccessModel = UpdateDepartSuccessModel.fromJson(value.data);
+      emit(UpdateDepartSuccessState(updateDepartSuccessModel!));
     })
         .catchError((error) {
       print(error.toString());

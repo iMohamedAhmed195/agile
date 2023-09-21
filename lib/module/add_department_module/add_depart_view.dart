@@ -1,8 +1,12 @@
 import 'package:agile/module/add_department_module/add_depart_cubit/add_depart_cubit.dart';
 import 'package:agile/shared/component/custom_text_sec_login.dart';
+import 'package:agile/shared/network/remote/logging_interceptor.dart';
+import 'package:agile/shared/service/app_reouter.dart';
+import 'package:agile/shared/service/show_toast.dart';
 import 'package:agile/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 
 class AddDepartmentView extends StatelessWidget {
@@ -74,15 +78,21 @@ class AddDepartmentView extends StatelessWidget {
                           color: const Color(0xff5A55CA)),
                       child: BlocConsumer<AddDepartCubit, AddDepartState>(
                         listener: (context, state) {
-                          if(state is AddDepartSuccessState){
+                          if (state is AddDepartSuccessState) {
+                            showToast(text: LoggingInterceptor.SuccessMessage, state: ToastState.SUCCESS);
+                            GoRouter.of(context).push(AppRouter.kHomeAdmin);
+                          }else if (state is AddDepartErrorState) {
 
+                            showToast(text: LoggingInterceptor.errorMessage, state: ToastState.ERORR);
                           }
                         },
                         builder: (context, state) {
                           return MaterialButton(
                             onPressed: () {
 
-                              AddDepartCubit.get(context).addedDepartment(nameDepart: nameController.text);
+                              if(formkey.currentState!.validate()){
+                                AddDepartCubit.get(context).addedDepartment(nameDepart: nameController.text);
+                              }
                             },
                             child: const Text(
                               'Create',

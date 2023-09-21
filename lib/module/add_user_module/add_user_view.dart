@@ -1,6 +1,8 @@
 import 'package:agile/module/add_user_module/add_user_cubit/add_user_cubit.dart';
 import 'package:agile/shared/component/custom_text_sec_login.dart';
+import 'package:agile/shared/network/remote/logging_interceptor.dart';
 import 'package:agile/shared/service/app_reouter.dart';
+import 'package:agile/shared/service/show_toast.dart';
 import 'package:agile/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -135,7 +137,10 @@ class AddUserView extends StatelessWidget {
                     BlocConsumer<AddUserCubit, AddUserState>(
                       listener: (context, state) {
                         if (state is AddUserSuccessState) {
+                          showToast(text: LoggingInterceptor.SuccessMessage, state: ToastState.SUCCESS);
                           GoRouter.of(context).push(AppRouter.kHomeAdmin);
+                        }else if (state is AddUserErrorState) {
+                          showToast(text: LoggingInterceptor.errorMessage, state: ToastState.ERORR);
                         }
                       },
                       builder: (context, state) {

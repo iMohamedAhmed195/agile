@@ -1,6 +1,7 @@
 import 'package:agile/module/login_module/login_cubit/login_cubit.dart';
 
 import 'package:agile/shared/component/custom_text_sec_login.dart';
+import 'package:agile/shared/network/remote/logging_interceptor.dart';
 import 'package:agile/shared/service/app_reouter.dart';
 import 'package:agile/shared/service/secure.dart';
 import 'package:agile/shared/service/show_toast.dart';
@@ -26,10 +27,13 @@ class LogInView extends StatelessWidget {
             key: formkey,
             child: Column(
               children: [
-                const TextSecLogin(
-                    header: 'Welcome Back!',
-                    para:
-                        'Login to access your assinged tasks and personal overview.'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: const TextSecLogin(
+                      header: 'Welcome Back!',
+                      para:
+                          'Login to access your Assigned tasks and personal overview.'),
+                ),
                 Column(
                   children: [
                     Padding(
@@ -97,7 +101,7 @@ class LogInView extends StatelessWidget {
                     BlocConsumer<LoginCubit, LoginState>(
                       listener: (context, state) {
                         if (state is LoginSuccessState) {
-                          showToast(text: state.loginModel.message, state: ToastState.SUCCESS);
+                          showToast(text: LoggingInterceptor.SuccessMessage, state: ToastState.SUCCESS);
                           if(state.loginModel.data!.userType == "admin") {
                             GoRouter.of(context).push(AppRouter.kHomeAdmin);
                           }
@@ -108,7 +112,7 @@ class LogInView extends StatelessWidget {
                         }
                         else if(state is LoginErrorState){
                           print(state.error!);
-                          showToast(text: state.error!, state: ToastState.ERORR);
+                          showToast(text: LoggingInterceptor.errorMessage, state: ToastState.ERORR);
                         }
                       },
                       builder: (context, state) {

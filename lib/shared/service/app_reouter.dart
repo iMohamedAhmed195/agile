@@ -1,5 +1,8 @@
 import 'package:agile/module/add_department_module/add_depart_view.dart';
 import 'package:agile/module/create_task_module/create_task_view.dart';
+import 'package:agile/module/delete_modules/delete_department_view.dart';
+import 'package:agile/module/delete_modules/delete_tasks_view.dart';
+import 'package:agile/module/delete_modules/delete_user_view.dart';
 import 'package:agile/module/home_module/home_admin_view.dart';
 
 import 'package:agile/module/login_module/login_view.dart';
@@ -20,6 +23,9 @@ abstract class AppRouter {
   static const kUpdateDepart = "/updateDepart";
   static const kCreateTasks = "/createTasks";
   static const kUpdateTasks = "/updateTasks";
+  static const kDeleteUser = "/deleteUser";
+  static const kDeleteTasks = "/deleteTasks";
+  static const kDeleteDepart = "/deleteDepart";
   static String  taskId = ' ';
   static String  taskName= ' ';
   static String  taskStartDate= ' ';
@@ -60,6 +66,19 @@ abstract class AppRouter {
         path: kCreateTasks,
         builder: (context, state) => CreateTaskView(),
       ),
+      GoRoute(
+        path: kDeleteUser,
+        builder: (context, state) => DeleteUserView(),
+      ),
+      GoRoute(
+        path: kDeleteTasks,
+        builder: (context, state) => DeleteTasksView(),
+      ),
+      GoRoute(
+        path: kDeleteDepart,
+        builder: (context, state) => DeleteDepartView(),
+      ),
+
       GoRoute(
         path: kUpdateTasks,
         builder: (context, state) => new UpdateTasksView(

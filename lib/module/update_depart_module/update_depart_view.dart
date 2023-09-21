@@ -1,8 +1,12 @@
 import 'package:agile/module/update_depart_module/update_depart_cubit/update_depart_cubit.dart';
 import 'package:agile/shared/component/custom_text_sec_login.dart';
+import 'package:agile/shared/network/remote/logging_interceptor.dart';
+import 'package:agile/shared/service/app_reouter.dart';
+import 'package:agile/shared/service/show_toast.dart';
 import 'package:agile/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class UpdateDepartmentView extends StatelessWidget {
   UpdateDepartmentView({super.key});
@@ -15,8 +19,13 @@ class UpdateDepartmentView extends StatelessWidget {
       create: (context) => UpdateDepartCubit()..getManagers()..getUsers(),
       child: BlocConsumer<UpdateDepartCubit, UpdateDepartState>(
         listener: (context, state) {
-          if(state is UpdateDepartSuccessState){
 
+          if (state is UpdateDepartSuccessState) {
+            showToast(text: LoggingInterceptor.SuccessMessage, state: ToastState.SUCCESS);
+            GoRouter.of(context).push(AppRouter.kHomeAdmin);
+          }else if (state is UpdateDepartErrorState) {
+
+            showToast(text: LoggingInterceptor.errorMessage, state: ToastState.ERORR);
           }
         },
         builder: (context, state) {

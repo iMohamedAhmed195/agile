@@ -1,5 +1,7 @@
+import 'package:agile/shared/network/remote/logging_interceptor.dart';
 import 'package:agile/shared/service/app_reouter.dart';
 import 'package:agile/shared/service/screen_size.dart';
+import 'package:agile/shared/service/show_toast.dart';
 import 'package:agile/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +39,13 @@ class UpdateTasksView extends StatelessWidget {
         ..getUsers(),
       child: BlocConsumer<UpdateTasksCubit, UpdateTasksState>(
         listener: (context, state) {
-          if(state is GetTasksSuccessState){
+
+          if (state is GetTasksSuccessState) {
+            showToast(text: LoggingInterceptor.SuccessMessage, state: ToastState.SUCCESS);
+            GoRouter.of(context).push(AppRouter.kHomeAdmin);
+          }else if (state is GetTasksErrorState) {
+
+            showToast(text: LoggingInterceptor.errorMessage, state: ToastState.ERORR);
           }
         },
         builder: (context, state) {

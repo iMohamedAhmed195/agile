@@ -1,5 +1,4 @@
 import 'package:agile/module/home_module/home%20_cubit/home_admin_cubit.dart';
-import 'package:agile/module/update_tasks_module/update_tasks_view.dart';
 import 'package:agile/shared/service/app_reouter.dart';
 import 'package:agile/shared/service/screen_size.dart';
 import 'package:agile/shared/styles/colors.dart';
@@ -35,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return BlocProvider(
-      create: (context) => HomeAdminCubit()..getTasks(),
+      create: (context) => HomeAdminCubit()..getDepart()..getTasks(),
       child: BlocConsumer<HomeAdminCubit, HomeAdminState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -64,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen>
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.purple,
+                        color: Color(0xff5A55CA),
                         borderRadius: BorderRadius.circular(12)),
                     width: 40,
                     child: IconButton(
@@ -72,17 +71,18 @@ class _HomeScreenState extends State<HomeScreen>
                         icon: const Icon(
                           Icons.add,
                           size: 25,
+                          color: Colors.white,
                         )),
                   ),
                 )
               ],
               bottom: TabBar(
                 controller: tabController,
-                indicatorColor: Styles.kColor,
-                labelColor: Styles.kColor,
+                indicatorColor: Color(0xff5A55CA),
+                labelColor: Color(0xff5A55CA),
                 unselectedLabelColor: Color(0xff091E4A),
                 tabs: [
-                  Tab(text: 'Users', icon: Icon(Icons.person_outline)),
+                  Tab(text: 'Users', icon: Icon(Icons.person_outline),),
                   Tab(text: 'Tasks', icon: Icon(Icons.newspaper_outlined)),
                 ],
               ),
@@ -112,6 +112,19 @@ class _HomeScreenState extends State<HomeScreen>
                               happened: 'Update Department',
                               icon: Icons.receipt_long_outlined,
                               context: context),
+                           myDrawerList(
+                              happened: 'Delete Departments',
+                              icon: Icons.delete,
+                              context: context),
+                          myDrawerList(
+                              happened: 'Delete Users',
+                              icon: Icons.delete,
+                              context: context),
+                          myDrawerList(
+                              happened: 'Delete Tasks',
+                              icon: Icons.delete,
+                              context: context),
+
                         ],
                       ),
                     )
@@ -129,10 +142,10 @@ class _HomeScreenState extends State<HomeScreen>
                         child: ConditionalBuilder(
                           condition: state is GetTasksSuccessState,
                           builder: (BuildContext context) {
-                            return ListView.separated(
+                            return ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
+                                itemBuilder: (context, indexDepartment) {
                                   return Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -141,12 +154,23 @@ class _HomeScreenState extends State<HomeScreen>
                                       SizedBox(
                                           height:
                                               ScreenSize.screenHeight * 0.01),
-                                      Text(
-                                        "",
-                                        style: const TextStyle(
-                                            color: Color(0xff091E4A),
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.sizeOf(context).width *0.2,
+                                            height: 1,
+                                            color: Colors.grey[400],
+                                          ),
+                                          SizedBox(width: 7,),
+                                          Text(HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].name!
+                                          ,
+                                            style: const TextStyle(
+                                                color: Color(0xff091E4A),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
+                                          ),
+                                          Icon(Icons.edit_note),
+                                        ],
                                       ),
                                       SizedBox(
                                           height:
@@ -173,17 +197,15 @@ class _HomeScreenState extends State<HomeScreen>
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                color: Colors.white70,
-                                                border: Border.all(
-                                                  color: Colors.grey,
-                                                ),
+                                                color: Colors.white,
+
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: Colors.grey
-                                                        .withOpacity(0.5),
+                                                        .withOpacity(0.3),
                                                     spreadRadius: 2,
                                                     blurRadius: 5,
-                                                    offset: const Offset(0, 3),
+                                                    offset: const Offset(0, 4),
                                                   ),
                                                 ],
                                               ),
@@ -194,8 +216,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      '',
+                                                    Text(HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].employees![index].name!,
                                                       maxLines: 1,
                                                       style: const TextStyle(
                                                           fontWeight:
@@ -224,8 +245,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                         padding:
                                                             const EdgeInsets
                                                                 .all(5.0),
-                                                        child: Text(
-                                                          '',
+                                                        child: Text(HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].employees![index].userType!,
                                                           style:
                                                               const TextStyle(
                                                                   color: Styles
@@ -257,8 +277,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                           width: ScreenSize
                                                                   .screenWidth *
                                                               0.2,
-                                                          child: Text(
-                                                            '',
+                                                          child: Text(HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].employees![index].email!,
                                                             style: const TextStyle(
                                                                 color: Color(
                                                                     0xff091E4A),
@@ -294,7 +313,16 @@ class _HomeScreenState extends State<HomeScreen>
                                                                   .screenWidth *
                                                               0.2,
                                                           child: Text(
-                                                            '',
+                                                           '${
+                                                              HomeAdminCubit.get(
+                                                                      context)
+                                                                  .getAllDepartmentModel!
+                                                                  .data![
+                                                                      indexDepartment]
+                                                                  .employees![
+                                                                      index]
+                                                                  .phone!
+                                                            }',
                                                             style: const TextStyle(
                                                                 color: Color(
                                                                     0xff091E4A),
@@ -311,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen>
                                               ),
                                             );
                                           },
-                                          itemCount: 5,
+                                          itemCount: HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].employees!.length,
                                         ),
                                       ),
                                       SizedBox(
@@ -320,13 +348,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ],
                                   );
                                 },
-                                separatorBuilder: (context, index) {
-                                  return const Divider(
-                                    height: 1,
-                                    color: Colors.grey,
-                                  );
-                                },
-                                itemCount: 5);
+                                itemCount: HomeAdminCubit.get(context).getAllDepartmentModel!.data!.length);
                           },
                           fallback: (BuildContext context) {
                             return Center(
@@ -368,10 +390,8 @@ class _HomeScreenState extends State<HomeScreen>
                                     width: ScreenSize.screenWidth * 0.3,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white70,
-                                      border: Border.all(
-                                        color: Colors.grey,
-                                      ),
+                                      color: Colors.white,
+
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.grey.withOpacity(0.5),
@@ -544,7 +564,14 @@ class _HomeScreenState extends State<HomeScreen>
             GoRouter.of(context).push(AppRouter.kUpdateUser);
           } else if (text == 'Update Department') {
             GoRouter.of(context).push(AppRouter.kUpdateDepart);
+          }else if (text == 'Delete Departments') {
+            GoRouter.of(context).push(AppRouter.kDeleteDepart);
+          }else if (text == 'Delete Users') {
+            GoRouter.of(context).push(AppRouter.kDeleteUser);
+          }else if (text == 'Delete Tasks') {
+            GoRouter.of(context).push(AppRouter.kDeleteTasks);
           }
+
         },
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0),

@@ -11,6 +11,9 @@ const updateUserDetails = '/user/update/';
 const createTasks = '/task/store';
 const getAllTasks='/task/index';
 const updateTasks = '/task/update/';
+const deleteUser= '/user/delete/';
+const deleteTask= '/task/delete/';
+const deleteDepart= '/department/delete/';
 
 
 
