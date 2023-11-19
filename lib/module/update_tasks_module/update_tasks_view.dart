@@ -40,10 +40,10 @@ class UpdateTasksView extends StatelessWidget {
       child: BlocConsumer<UpdateTasksCubit, UpdateTasksState>(
         listener: (context, state) {
 
-          if (state is GetTasksSuccessState) {
+          if (state is UpdateTasksSuccessState) {
             showToast(text: LoggingInterceptor.SuccessMessage, state: ToastState.SUCCESS);
             GoRouter.of(context).push(AppRouter.kHomeAdmin);
-          }else if (state is GetTasksErrorState) {
+          }else if (state is UpdateTasksErrorState) {
 
             showToast(text: LoggingInterceptor.errorMessage, state: ToastState.ERORR);
           }
@@ -671,17 +671,6 @@ class UpdateTasksView extends StatelessWidget {
                               color: const Color(0xff5A55CA)),
                           child: MaterialButton(
                             onPressed: () {
-                              print(titleController.text);
-                              print(descriptionController.text);
-                              print(UpdateTasksCubit.get(context).departChoose);
-                              print(taskId!);
-                              print(UpdateTasksCubit.get(context).userChoose);
-                              print(UpdateTasksCubit.get(context)
-                                  .splitStartDate);
-                              print(taskStartDate!);
-                              print(UpdateTasksCubit.get(context)
-                                  .splitEndDate);
-                              print(taskEndDate!);
                               UpdateTasksCubit.get(context).updateUser(
                                   name: titleController.text,
                                   description: descriptionController.text,

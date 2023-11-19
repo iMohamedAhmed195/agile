@@ -12,8 +12,6 @@ class AddUserModel {
     status = json['status'];
     code = json['code'];
   }
-
-
 }
 
 class DataUser {

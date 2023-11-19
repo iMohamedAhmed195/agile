@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen>
                               happened: 'Update Department',
                               icon: Icons.receipt_long_outlined,
                               context: context),
-                           myDrawerList(
+                          myDrawerList(
                               happened: 'Delete Departments',
                               icon: Icons.delete,
                               context: context),
@@ -149,11 +149,11 @@ class _HomeScreenState extends State<HomeScreen>
                                   return Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(
                                           height:
-                                              ScreenSize.screenHeight * 0.01),
+                                          ScreenSize.screenHeight * 0.01),
                                       Row(
                                         children: [
                                           Container(
@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           ),
                                           SizedBox(width: 7,),
                                           Text(HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].name!
-                                          ,
+                                            ,
                                             style: const TextStyle(
                                                 color: Color(0xff091E4A),
                                                 fontWeight: FontWeight.bold,
@@ -174,15 +174,15 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                                       SizedBox(
                                           height:
-                                              ScreenSize.screenHeight * 0.01),
+                                          ScreenSize.screenHeight * 0.01),
                                       SizedBox(
                                         width: ScreenSize.screenWidth,
                                         child: GridView.builder(
                                           shrinkWrap: true,
                                           physics:
-                                              const NeverScrollableScrollPhysics(),
+                                          const NeverScrollableScrollPhysics(),
                                           gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
                                             mainAxisSpacing: 20,
                                             crossAxisSpacing: 30,
@@ -191,12 +191,12 @@ class _HomeScreenState extends State<HomeScreen>
                                               int index) {
                                             return Container(
                                               height:
-                                                  ScreenSize.screenHeight * 0.2,
+                                              ScreenSize.screenHeight * 0.2,
                                               width:
-                                                  ScreenSize.screenWidth * 0.3,
+                                              ScreenSize.screenWidth * 0.3,
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(10),
+                                                BorderRadius.circular(10),
                                                 color: Colors.white,
 
                                                 boxShadow: [
@@ -211,58 +211,58 @@ class _HomeScreenState extends State<HomeScreen>
                                               ),
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(15.0),
+                                                const EdgeInsets.all(15.0),
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                                   children: [
                                                     Text(HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].employees![index].name!,
                                                       maxLines: 1,
                                                       style: const TextStyle(
                                                           fontWeight:
-                                                              FontWeight.bold,
+                                                          FontWeight.bold,
                                                           color:
-                                                              Color(0xff091E4A),
+                                                          Color(0xff091E4A),
                                                           fontSize: 16,
                                                           overflow: TextOverflow
                                                               .ellipsis),
                                                     ),
                                                     SizedBox(
                                                       height: ScreenSize
-                                                              .screenHeight *
+                                                          .screenHeight *
                                                           0.01,
                                                     ),
                                                     Container(
                                                       decoration: BoxDecoration(
                                                         color: const Color(
-                                                                0xff5A55CA)
+                                                            0xff5A55CA)
                                                             .withOpacity(0.1),
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
+                                                        BorderRadius
+                                                            .circular(5),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .all(5.0),
+                                                        const EdgeInsets
+                                                            .all(5.0),
                                                         child: Text(HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].employees![index].userType!,
                                                           style:
-                                                              const TextStyle(
-                                                                  color: Styles
-                                                                      .kColor,
-                                                                  fontSize: 16),
+                                                          const TextStyle(
+                                                              color: Styles
+                                                                  .kColor,
+                                                              fontSize: 16),
                                                         ),
                                                       ),
                                                     ),
                                                     SizedBox(
                                                       height: ScreenSize
-                                                              .screenHeight *
+                                                          .screenHeight *
                                                           0.01,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                      MainAxisAlignment
+                                                          .start,
                                                       children: [
                                                         const Icon(
                                                           Icons.email_outlined,
@@ -270,12 +270,12 @@ class _HomeScreenState extends State<HomeScreen>
                                                         ),
                                                         SizedBox(
                                                           width: ScreenSize
-                                                                  .screenWidth *
+                                                              .screenWidth *
                                                               0.005,
                                                         ),
                                                         SizedBox(
                                                           width: ScreenSize
-                                                                  .screenWidth *
+                                                              .screenWidth *
                                                               0.2,
                                                           child: Text(HomeAdminCubit.get(context).getAllDepartmentModel!.data![indexDepartment].employees![index].email!,
                                                             style: const TextStyle(
@@ -283,21 +283,21 @@ class _HomeScreenState extends State<HomeScreen>
                                                                     0xff091E4A),
                                                                 fontSize: 15,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis),
+                                                                TextOverflow
+                                                                    .ellipsis),
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                     SizedBox(
                                                       height: ScreenSize
-                                                              .screenHeight *
+                                                          .screenHeight *
                                                           0.01,
                                                     ),
                                                     Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                      MainAxisAlignment
+                                                          .start,
                                                       children: [
                                                         const Icon(
                                                           Icons.call_outlined,
@@ -305,31 +305,31 @@ class _HomeScreenState extends State<HomeScreen>
                                                         ),
                                                         SizedBox(
                                                           width: ScreenSize
-                                                                  .screenWidth *
+                                                              .screenWidth *
                                                               0.005,
                                                         ),
                                                         SizedBox(
                                                           width: ScreenSize
-                                                                  .screenWidth *
+                                                              .screenWidth *
                                                               0.2,
                                                           child: Text(
-                                                           '${
-                                                              HomeAdminCubit.get(
-                                                                      context)
-                                                                  .getAllDepartmentModel!
-                                                                  .data![
-                                                                      indexDepartment]
-                                                                  .employees![
-                                                                      index]
-                                                                  .phone!
+                                                            '${
+                                                                HomeAdminCubit.get(
+                                                                    context)
+                                                                    .getAllDepartmentModel!
+                                                                    .data![
+                                                                indexDepartment]
+                                                                    .employees![
+                                                                index]
+                                                                    .phone!
                                                             }',
                                                             style: const TextStyle(
                                                                 color: Color(
                                                                     0xff091E4A),
                                                                 fontSize: 15,
                                                                 overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis),
+                                                                TextOverflow
+                                                                    .ellipsis),
                                                           ),
                                                         ),
                                                       ],
@@ -344,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                                       SizedBox(
                                           height:
-                                              ScreenSize.screenHeight * 0.03),
+                                          ScreenSize.screenHeight * 0.03),
                                     ],
                                   );
                                 },
@@ -369,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen>
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 20,
                                 crossAxisSpacing: 30,
@@ -405,7 +405,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       padding: const EdgeInsets.all(15.0),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             HomeAdminCubit.get(context)
@@ -419,22 +419,22 @@ class _HomeScreenState extends State<HomeScreen>
                                                 color: Color(0xff091E4A),
                                                 fontSize: 16,
                                                 overflow:
-                                                    TextOverflow.ellipsis),
+                                                TextOverflow.ellipsis),
                                           ),
                                           SizedBox(
                                             height:
-                                                ScreenSize.screenHeight * 0.01,
+                                            ScreenSize.screenHeight * 0.01,
                                           ),
                                           Container(
                                             decoration: BoxDecoration(
                                               color: const Color(0xff5A55CA)
                                                   .withOpacity(0.1),
                                               borderRadius:
-                                                  BorderRadius.circular(5),
+                                              BorderRadius.circular(5),
                                             ),
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.all(5.0),
+                                              const EdgeInsets.all(5.0),
                                               child: Text(
                                                 HomeAdminCubit.get(context)
                                                     .getAllTasksModel!
@@ -448,11 +448,11 @@ class _HomeScreenState extends State<HomeScreen>
                                           ),
                                           SizedBox(
                                             height:
-                                                ScreenSize.screenHeight * 0.01,
+                                            ScreenSize.screenHeight * 0.01,
                                           ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                             children: [
                                               const Icon(
                                                 Icons.email_outlined,
@@ -482,11 +482,11 @@ class _HomeScreenState extends State<HomeScreen>
                                           ),
                                           SizedBox(
                                             height:
-                                                ScreenSize.screenHeight * 0.01,
+                                            ScreenSize.screenHeight * 0.01,
                                           ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                             children: [
                                               const Icon(
                                                 Icons.call_outlined,
@@ -540,8 +540,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget myDrawerList(
       {required String happened,
-      required IconData icon,
-      required BuildContext context}) {
+        required IconData icon,
+        required BuildContext context}) {
     return Column(
       children: [
         menuItem(text: happened, icon: icon, context: context),
@@ -551,8 +551,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget menuItem(
       {required String text,
-      required IconData icon,
-      required BuildContext context}) {
+        required IconData icon,
+        required BuildContext context}) {
     return Material(
       child: InkWell(
         onTap: () {

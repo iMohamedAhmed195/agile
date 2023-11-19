@@ -61,6 +61,7 @@ class DioHelper {
     };
     return await dio.put(url, queryParameters: query, data: data);
   }
+  
   static Future<Response> deleteData({
     required String url,
     String? token,

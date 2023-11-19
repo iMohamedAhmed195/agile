@@ -3,6 +3,7 @@ import 'package:agile/models/get_department_model/get_department_model.dart';
 import 'package:agile/shared/network/remote/dio_helper.dart';
 import 'package:agile/shared/network/remote/end_points.dart';
 import 'package:agile/shared/service/secure.dart';
+import 'package:dio/dio.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,10 +39,14 @@ class HomeAdminCubit extends Cubit<HomeAdminState> {
       url: getAllTasks,
       token: await Secure().secureGetData(key: 'token'),
     ).then((value) {
+
       getAllTasksModel = GetAllTasksModel.fromJson(value.data);
       emit(GetTasksSuccessState(getAllTasksModel!));
     }).catchError((error) {
-      print(error.toString());
+      if(error is DioException){
+        print(error);
+      }
+      print(error.message);
       emit(GetTasksErrorState(error.toString()));
     });
   }
